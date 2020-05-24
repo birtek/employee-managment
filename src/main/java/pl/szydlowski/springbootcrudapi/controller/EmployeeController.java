@@ -23,8 +23,29 @@ public class EmployeeController {
         return employeeService.getEmployees();
     }
 
+    @GetMapping("employees/{id}")
+    public Employee getEmployee(@PathVariable int id){
+        Employee employee = employeeService.getEmployee(id);
+        if(employee == null){
+            throw new RuntimeException("Employee with id: "+ id + " not found");
+        }
+        return employee;
+    }
+
     @PostMapping("/employees")
     public Employee saveEmployee(@RequestBody Employee employeeObj) {
+        employeeService.save(employeeObj);
+        return employeeObj;
+    }
+
+    @DeleteMapping("/employees/{id}")
+    public String deleteEmployee(@PathVariable int id){
+        employeeService.delete(id);
+        return "Employee has been deleted with id: " + id;
+    }
+
+    @PutMapping("/employees")
+    public Employee updateEmployee(@RequestBody Employee employeeObj){
         employeeService.save(employeeObj);
         return employeeObj;
     }

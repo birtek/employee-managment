@@ -27,8 +27,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Transactional
     @Override
-    public Employee getEmpoloyee(int id) {
-        return null;
+    public Employee getEmployee(int id) {
+        return employeeDAO.getEmployee(id);
     }
 
     @Transactional
@@ -40,6 +40,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Transactional
     @Override
     public void delete(int id) {
-
+        employeeDAO.delete(id);
     }
 }
