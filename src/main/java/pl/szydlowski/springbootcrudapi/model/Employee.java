@@ -18,7 +18,7 @@ public class Employee {
     @Column
     private String gender;
     @Column
-    private String departament;
+    private String department;
     @Column(name = "dob")
     private Date date;
 
@@ -46,12 +46,12 @@ public class Employee {
         this.gender = gender;
     }
 
-    public String getDepartament() {
-        return departament;
+    public String getDepartment() {
+        return department;
     }
 
-    public void setDepartament(String departament) {
-        this.departament = departament;
+    public void setDepartment(String department) {
+        this.department = department;
     }
 
     public Date getDate() {
@@ -68,7 +68,7 @@ public class Employee {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", gender='" + gender + '\'' +
-                ", departament='" + departament + '\'' +
+                ", departament='" + department + '\'' +
                 ", date=" + date +
                 '}';
     }

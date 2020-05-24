@@ -16,6 +16,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<start-class>pl.szydlowski.springbootcrudapi.SpringbootcrudapiApplication</start-class>
 	</properties>
 
 	<dependencies>
