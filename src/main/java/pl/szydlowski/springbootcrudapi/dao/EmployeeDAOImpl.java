@@ -28,7 +28,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
     @Override
-    public Employee getEmployee(int id) {
+    public Employee getEmployeeById(int id) {
         Session currentSession = getSession();
         return currentSession.get(Employee.class, id);
     }
