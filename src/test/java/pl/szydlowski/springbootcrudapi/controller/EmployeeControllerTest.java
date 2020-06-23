@@ -9,6 +9,7 @@ import pl.szydlowski.springbootcrudapi.model.Employee;
 import pl.szydlowski.springbootcrudapi.service.EmployeeServiceImpl;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -30,7 +31,7 @@ class EmployeeControllerTest {
 
         employee = new Employee();
         employee.setId(1);
-        employee.setDate(Date.valueOf("1994-11-12"));
+        employee.setDate(LocalDate.parse("1994-12-13"));
         employee.setDepartment("hr");
         employee.setGender("male");
         employee.setName("Alex");
@@ -40,7 +41,7 @@ class EmployeeControllerTest {
     void getEmployee() {
         when(employeeService.getEmployeeById(anyInt())).thenReturn(employee);
 
-        Employee employeeRest = employeeController.getEmployee(77);
+        Employee employeeRest = employeeController.getEmployee(97);
 
         assertNotNull(employeeRest);
         assertEquals(employee.getName(),employeeRest.getName());

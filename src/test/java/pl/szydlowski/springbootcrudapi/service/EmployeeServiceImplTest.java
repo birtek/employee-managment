@@ -9,6 +9,7 @@ import pl.szydlowski.springbootcrudapi.dao.EmployeeDAO;
 import pl.szydlowski.springbootcrudapi.model.Employee;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -32,7 +33,7 @@ class EmployeeServiceImplTest {
 
         Employee employee = new Employee();
         employee.setId(1);
-        employee.setDate(Date.valueOf("1994-11-12"));
+        employee.setDate(LocalDate.parse("1994-12-13"));
         employee.setDepartment("hr");
         employee.setGender("male");
         employee.setName("Alex");

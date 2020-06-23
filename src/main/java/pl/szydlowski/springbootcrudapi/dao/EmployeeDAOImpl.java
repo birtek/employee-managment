@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import pl.szydlowski.springbootcrudapi.model.Employee;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
@@ -21,29 +22,26 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
     @Override
     public List<Employee> getEmployees() {
-        Session currentSession = getSession();
-        Query<Employee> query = currentSession.createQuery("from Employee", Employee.class);
+        // return currentSession.createQuery("SELECT e FROM Employee e", Employee.class).list();
+        TypedQuery<Employee> query = getSession().createQuery("SELECT e FROM Employee e", Employee.class);
         return query.getResultList();
 
     }
 
     @Override
     public Employee getEmployeeById(int id) {
-        Session currentSession = getSession();
-        return currentSession.get(Employee.class, id);
+        return getSession().get(Employee.class, id);
     }
 
     @Override
     public void save(Employee employee) {
-        Session currentSession = getSession();
-        currentSession.saveOrUpdate(employee);
+        getSession().saveOrUpdate(employee);
     }
 
     @Override
     public void delete(int id) {
-        Session currentSession = getSession();
-        Employee employee = currentSession.get(Employee.class, id);
-        currentSession.delete(employee);
+        Employee employee = getSession().get(Employee.class, id);
+        getSession().delete(employee);
 
     }
 

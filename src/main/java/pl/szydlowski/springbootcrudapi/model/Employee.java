@@ -4,6 +4,7 @@ package pl.szydlowski.springbootcrudapi.model;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "tbl_employee")
@@ -20,7 +21,7 @@ public class Employee {
     @Column
     private String department;
     @Column(name = "dob")
-    private Date date;
+    private LocalDate date;
 
     public Integer getId() {
         return id;
@@ -54,11 +55,11 @@ public class Employee {
         this.department = department;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

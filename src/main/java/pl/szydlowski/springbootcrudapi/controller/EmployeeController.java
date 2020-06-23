@@ -8,7 +8,7 @@ import pl.szydlowski.springbootcrudapi.service.EmployeeService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 public class EmployeeController {
 
     private EmployeeService employeeService;
@@ -26,9 +26,6 @@ public class EmployeeController {
     @GetMapping("employees/{id}")
     public Employee getEmployee(@PathVariable int id){
         Employee employee = employeeService.getEmployeeById(id);
-        if(employee == null){
-            throw new RuntimeException("Employee with id: "+ id + " not found");
-        }
         return employee;
     }
 
