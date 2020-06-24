@@ -6,6 +6,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import pl.szydlowski.springbootcrudapi.model.Employee;
+import pl.szydlowski.springbootcrudapi.model.Gender;
 import pl.szydlowski.springbootcrudapi.service.EmployeeServiceImpl;
 
 import java.sql.Date;
@@ -30,11 +31,12 @@ class EmployeeControllerTest {
         MockitoAnnotations.initMocks(this);
 
         employee = new Employee();
-        employee.setId(1);
         employee.setDate(LocalDate.parse("1994-12-13"));
         employee.setDepartment("hr");
-        employee.setGender("male");
+        employee.setGender(Gender.OTHER);
         employee.setName("Alex");
+        employee.setLastName("Novikic");
+        employee.setPhoneNumber("998765432");
     }
 
     @Test

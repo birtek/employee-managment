@@ -3,25 +3,30 @@ package pl.szydlowski.springbootcrudapi.model;
 
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Entity
 @Table(name = "tbl_employee")
 public class Employee {
+    //UUID uuid = UUID.randomUUID();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
+    @Column(name = "id_employee")
     private Integer id;
     @Column
     private String name;
-    @Column
-    private String gender;
+    @Column(name = "last_name")
+    private String lastName;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
     @Column
     private String department;
     @Column(name = "dob")
     private LocalDate date;
+    @Column(name = "phone_number")
+    private String phoneNumber;
 
     public Integer getId() {
         return id;
@@ -39,12 +44,28 @@ public class Employee {
         this.name = name;
     }
 
-    public String getGender() {
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getDepartment() {
@@ -66,11 +87,13 @@ public class Employee {
     @Override
     public String toString() {
         return "Employee{" +
-                "id=" + id +
+                ", id=" + id +
                 ", name='" + name + '\'' +
-                ", gender='" + gender + '\'' +
-                ", departament='" + department + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", gender=" + gender +
+                ", department='" + department + '\'' +
                 ", date=" + date +
+                ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
     }
 }

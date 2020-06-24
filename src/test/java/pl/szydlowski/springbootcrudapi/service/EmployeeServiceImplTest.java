@@ -7,6 +7,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import pl.szydlowski.springbootcrudapi.dao.EmployeeDAO;
 import pl.szydlowski.springbootcrudapi.model.Employee;
+import pl.szydlowski.springbootcrudapi.model.Gender;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -35,16 +36,17 @@ class EmployeeServiceImplTest {
         employee.setId(1);
         employee.setDate(LocalDate.parse("1994-12-13"));
         employee.setDepartment("hr");
-        employee.setGender("male");
+        employee.setGender(Gender.MALE);
         employee.setName("Alex");
+
 
         when(employeeDAO.getEmployeeById(anyInt())).thenReturn(employee);
 
-        Employee employeeFound = employeeService.getEmployeeById(22);
+        Employee employeeFound = employeeService.getEmployeeById(2);
 
         assertNotNull(employeeFound);
 
-        assertEquals("Alex",employeeFound.getName());
-        assertEquals(1,employeeFound.getId());
+        assertEquals("Alexy",employeeFound.getName());
+        assertEquals(2,employeeFound.getId());
     }
 }
