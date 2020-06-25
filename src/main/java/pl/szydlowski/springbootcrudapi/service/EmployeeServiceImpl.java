@@ -29,8 +29,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee getEmployeeById(int id) {
         Employee employee = employeeDAO.getEmployeeById(id);
-        if(employee == null){
-            throw new RuntimeException("Employee with id: "+ id + " not found");
+        if (employee == null) {
+            throw new RuntimeException("Employee with id: " + id + " not found");
         }
         return employee;
     }
@@ -45,5 +45,19 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void delete(int id) {
         employeeDAO.delete(id);
+    }
+
+    @Transactional
+    @Override
+    public Employee editEmployee(Employee employee) {
+        Employee editedEmployee = employeeDAO.getEmployeeById(employee.getId());
+
+        editedEmployee.setPhoneNumber(employee.getPhoneNumber());
+        editedEmployee.setName(employee.getName());
+        editedEmployee.setLastName(employee.getLastName());
+        editedEmployee.setGender(employee.getGender());
+        editedEmployee.setGender(employee.getGender());
+
+        return editedEmployee;
     }
 }

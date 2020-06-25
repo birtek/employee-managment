@@ -25,7 +25,6 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         // return currentSession.createQuery("SELECT e FROM Employee e", Employee.class).list();
         TypedQuery<Employee> query = getSession().createQuery("SELECT e FROM Employee e", Employee.class);
         return query.getResultList();
-
     }
 
     @Override
@@ -42,7 +41,6 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     public void delete(int id) {
         Employee employee = getSession().get(Employee.class, id);
         getSession().delete(employee);
-
     }
 
     private Session getSession() {
