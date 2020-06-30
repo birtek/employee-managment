@@ -30,8 +30,31 @@ public class Employee {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "tbl_employee_task",
+            joinColumns = {@JoinColumn(name = "id_employee")},
+            inverseJoinColumns = {@JoinColumn(name = "id_task")}
+    )
     private Set<Task> tasks = new HashSet<>();
+//
+//    public void addTask(Task task){
+//        this.tasks.add(task);
+//        task.getEmployees().add(this);
+//    }
+//
+//    public void removeTask(Task task){
+//        this.tasks.remove(task);
+//        task.getEmployees().remove(this);
+//    }
+
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
+    }
 
     public Integer getId() {
         return id;
@@ -89,16 +112,31 @@ public class Employee {
         this.date = date;
     }
 
+    public Employee() {
+    }
+
+    public Employee(Integer id, String name, String lastName, Gender gender, String department, LocalDate date, String phoneNumber, Set<Task> tasks) {
+        this.id = id;
+        this.name = name;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.department = department;
+        this.date = date;
+        this.phoneNumber = phoneNumber;
+        this.tasks = tasks;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
-                ", id=" + id +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", gender=" + gender +
                 ", department='" + department + '\'' +
                 ", date=" + date +
                 ", phoneNumber='" + phoneNumber + '\'' +
+                ", tasks=" + tasks +
                 '}';
     }
 }

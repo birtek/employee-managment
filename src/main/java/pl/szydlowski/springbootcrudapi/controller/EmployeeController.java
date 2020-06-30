@@ -11,7 +11,7 @@ import java.util.List;
 @RequestMapping("/api/v1")
 public class EmployeeController {
 
-    private EmployeeService employeeService;
+    private final EmployeeService employeeService;
 
     @Autowired
     public EmployeeController(EmployeeService employeeService) {
@@ -43,7 +43,7 @@ public class EmployeeController {
 
     @PutMapping("/employees")
     public Employee updateEmployee(@RequestBody Employee employeeObj){
-        employeeService.save(employeeObj);
+        employeeService.editEmployee(employeeObj);
         return employeeObj;
     }
 }

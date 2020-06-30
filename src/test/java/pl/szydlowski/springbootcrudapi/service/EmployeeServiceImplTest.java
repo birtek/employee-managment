@@ -5,11 +5,10 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import pl.szydlowski.springbootcrudapi.dao.EmployeeDAO;
 import pl.szydlowski.springbootcrudapi.model.Employee;
 import pl.szydlowski.springbootcrudapi.model.Gender;
+import pl.szydlowski.springbootcrudapi.repository.EmployeeRepository;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,7 +21,7 @@ class EmployeeServiceImplTest {
     EmployeeServiceImpl employeeService;
 
     @Mock
-    private EmployeeDAO employeeDAO;
+    private EmployeeRepository employeeRepository;
 
     @BeforeEach
     void setUp() {
@@ -40,7 +39,7 @@ class EmployeeServiceImplTest {
         employee.setName("Alex");
 
 
-        when(employeeDAO.getEmployeeById(anyInt())).thenReturn(employee);
+        when(employeeService.getEmployeeById(anyInt())).thenReturn(employee);
 
         Employee employeeFound = employeeService.getEmployeeById(2);
 

@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name = "tbl_task")
 public class Task {
 
     @Id
@@ -16,14 +17,14 @@ public class Task {
     private String description;
 
     @Column(name = "begin")
-    private LocalDate taskBegin;;
+    private LocalDate taskBegin;
 
     @Column(name = "end")
     private LocalDate taskEnd;
 
     private Boolean status;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "tasks")
     private Set<Employee> employees = new HashSet<>();
 
     public Integer getId() {
@@ -64,5 +65,34 @@ public class Task {
 
     public void setStatus(Boolean status) {
         this.status = status;
+    }
+
+    public Set<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(Set<Employee> employees) {
+        this.employees = employees;
+    }
+
+    public Task(Integer id, String description, LocalDate taskBegin, LocalDate taskEnd, Boolean status, Set<Employee> employees) {
+        this.id = id;
+        this.description = description;
+        this.taskBegin = taskBegin;
+        this.taskEnd = taskEnd;
+        this.status = status;
+        this.employees = employees;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", taskBegin=" + taskBegin +
+                ", taskEnd=" + taskEnd +
+                ", status=" + status +
+                ", employees=" + employees +
+                '}';
     }
 }
