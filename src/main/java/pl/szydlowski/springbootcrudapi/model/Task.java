@@ -1,5 +1,7 @@
 package pl.szydlowski.springbootcrudapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -25,6 +27,7 @@ public class Task {
     private Boolean status;
 
     @ManyToMany(mappedBy = "tasks")
+    @JsonIgnoreProperties("tasks")
     private Set<Employee> employees = new HashSet<>();
 
     public Integer getId() {
@@ -72,15 +75,6 @@ public class Task {
     }
 
     public void setEmployees(Set<Employee> employees) {
-        this.employees = employees;
-    }
-
-    public Task(Integer id, String description, LocalDate taskBegin, LocalDate taskEnd, Boolean status, Set<Employee> employees) {
-        this.id = id;
-        this.description = description;
-        this.taskBegin = taskBegin;
-        this.taskEnd = taskEnd;
-        this.status = status;
         this.employees = employees;
     }
 

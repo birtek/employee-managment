@@ -2,6 +2,9 @@ package pl.szydlowski.springbootcrudapi.model;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -36,6 +39,7 @@ public class Employee {
             joinColumns = {@JoinColumn(name = "id_employee")},
             inverseJoinColumns = {@JoinColumn(name = "id_task")}
     )
+    @JsonIgnoreProperties("employees")
     private Set<Task> tasks = new HashSet<>();
 //
 //    public void addTask(Task task){
@@ -110,20 +114,6 @@ public class Employee {
 
     public void setDate(LocalDate date) {
         this.date = date;
-    }
-
-    public Employee() {
-    }
-
-    public Employee(Integer id, String name, String lastName, Gender gender, String department, LocalDate date, String phoneNumber, Set<Task> tasks) {
-        this.id = id;
-        this.name = name;
-        this.lastName = lastName;
-        this.gender = gender;
-        this.department = department;
-        this.date = date;
-        this.phoneNumber = phoneNumber;
-        this.tasks = tasks;
     }
 
     @Override
