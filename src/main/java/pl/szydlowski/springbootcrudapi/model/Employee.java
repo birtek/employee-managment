@@ -4,6 +4,8 @@ package pl.szydlowski.springbootcrudapi.model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -27,6 +29,9 @@ public class Employee {
     private LocalDate date;
     @Column(name = "phone_number")
     private String phoneNumber;
+
+    @ManyToMany
+    private Set<Task> tasks = new HashSet<>();
 
     public Integer getId() {
         return id;
