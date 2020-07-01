@@ -33,20 +33,21 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Transactional
     @Override
-    public void save(Employee employee) {
+    public void saveEmployee(Employee employee) {
         employeeRepository.save(employee);
     }
 
     @Transactional
     @Override
-    public void delete(int id) {
+    public void deleteEmployee(int id) {
         employeeRepository.deleteById(id);
     }
 
     @Transactional
     @Override
     public Employee editEmployee(Employee employee) {
-        Employee editedEmployee = employeeRepository.findById(employee.getId()).orElseThrow(IllegalStateException::new);
+        Employee editedEmployee = employeeRepository.findById(employee.getId())
+                .orElseThrow(()->new IllegalArgumentException("Employee not found"));
 
         editedEmployee.setPhoneNumber(employee.getPhoneNumber());
         editedEmployee.setName(employee.getName());

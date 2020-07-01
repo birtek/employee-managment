@@ -31,13 +31,13 @@ public class EmployeeController {
 
     @PostMapping("/employees")
     public Employee saveEmployee(@RequestBody Employee employeeObj) {
-        employeeService.save(employeeObj);
+        employeeService.saveEmployee(employeeObj);
         return employeeObj;
     }
 
     @DeleteMapping("/employees/{id}")
     public String deleteEmployee(@PathVariable int id){
-        employeeService.delete(id);
+        employeeService.deleteEmployee(id);
         return "Employee has been deleted with id: " + id;
     }
 

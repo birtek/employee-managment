@@ -4,6 +4,7 @@ package pl.szydlowski.springbootcrudapi.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -40,17 +41,8 @@ public class Employee {
             inverseJoinColumns = {@JoinColumn(name = "id_task")}
     )
     @JsonIgnoreProperties("employees")
+    @BatchSize(size = 2)
     private Set<Task> tasks = new HashSet<>();
-//
-//    public void addTask(Task task){
-//        this.tasks.add(task);
-//        task.getEmployees().add(this);
-//    }
-//
-//    public void removeTask(Task task){
-//        this.tasks.remove(task);
-//        task.getEmployees().remove(this);
-//    }
 
     public Set<Task> getTasks() {
         return tasks;

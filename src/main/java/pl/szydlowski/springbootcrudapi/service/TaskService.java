@@ -22,6 +22,6 @@ public class TaskService {
 
     public Task getSingleTask(int id) {
         return taskRepository.findById(id)
-                .orElseThrow(IllegalStateException::new);
+                .orElseThrow(()->new IllegalArgumentException("Task not found"));
     }
 }
