@@ -2,11 +2,9 @@ package pl.szydlowski.springbootcrudapi.controller.dto;
 
 import pl.szydlowski.springbootcrudapi.model.Gender;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 
-public class EmployeeDto{
-
+public class EmployeeDto {
     private Integer id;
     private String name;
     private String lastName;

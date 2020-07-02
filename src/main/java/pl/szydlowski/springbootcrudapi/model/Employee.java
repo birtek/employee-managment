@@ -4,13 +4,12 @@ package pl.szydlowski.springbootcrudapi.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Table(name = "tbl_employee")
@@ -41,13 +40,13 @@ public class Employee {
             inverseJoinColumns = {@JoinColumn(name = "id_task")}
     )
     @JsonIgnoreProperties("employees")
-    private Set<Task> tasks = new HashSet<>();
+    private List<Task> tasks = new ArrayList<>();
 
-    public Set<Task> getTasks() {
+    public List<Task> getTasks() {
         return tasks;
     }
 
-    public void setTasks(Set<Task> tasks) {
+    public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
     }
 

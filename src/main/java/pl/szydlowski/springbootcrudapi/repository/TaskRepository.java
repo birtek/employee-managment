@@ -18,4 +18,7 @@ public interface TaskRepository extends JpaRepository<Task,Integer> {
     @Override
     @Query("Select t from Task t left join fetch t.employees where t.id = :id")
     Optional<Task> findById(@Param("id")Integer integer);
+
+
+    List<Task> findAllByIdIn(List<Integer> ids);
 }

@@ -22,8 +22,12 @@ public class EmployeeController {
 
     @GetMapping("/employees")
     public List<EmployeeDto> getEmployees(@RequestParam(required = false) int page) {
-        int pageNumber = page > 0 ? page : 1;
-        return EmployeeDtoMapper.mapToEmployeeDtos(employeeService.getEmployees(pageNumber-1));
+        return EmployeeDtoMapper.mapToEmployeeDtos(employeeService.getEmployees(page));
+    }
+
+    @GetMapping("/employees/tasks")
+    public List<Employee> getEmployeesWithTasks(@RequestParam(required = false) int page) {
+        return employeeService.getEmployeesWithTasks(page);
     }
 
     @GetMapping("employees/{id}")

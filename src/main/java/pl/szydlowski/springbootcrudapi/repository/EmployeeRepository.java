@@ -17,4 +17,5 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     @Override
     @Query("select e from Employee e left join fetch e.tasks where e.id = :id ")
     Optional<Employee> findById(@Param("id") Integer integer);
+
 }

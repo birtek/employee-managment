@@ -4,8 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "tbl_task")
@@ -28,7 +30,24 @@ public class Task {
 
     @ManyToMany(mappedBy = "tasks")
     @JsonIgnoreProperties("tasks")
-    private Set<Employee> employees = new HashSet<>();
+    private List<Employee> employees = new ArrayList<>();
+
+    @Transient
+    public Set<Integer> employeeId;
+
+    @PostLoad
+    private void postLoad() {
+        employeeId = employees.stream().map(Employee::getId)
+                .collect(Collectors.toSet());
+    }
+
+    public Set<Integer> getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(Set<Integer> employeeId) {
+        this.employeeId = employeeId;
+    }
 
     public Integer getId() {
         return id;
@@ -70,11 +89,11 @@ public class Task {
         this.status = status;
     }
 
-    public Set<Employee> getEmployees() {
+    public List<Employee> getEmployees() {
         return employees;
     }
 
-    public void setEmployees(Set<Employee> employees) {
+    public void setEmployees(List<Employee> employees) {
         this.employees = employees;
     }
 
