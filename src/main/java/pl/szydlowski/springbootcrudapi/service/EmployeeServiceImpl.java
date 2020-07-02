@@ -1,6 +1,7 @@
 package pl.szydlowski.springbootcrudapi.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.szydlowski.springbootcrudapi.model.Employee;
@@ -12,6 +13,7 @@ import java.util.List;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
+    private static final int PAGE_SIZE = 5;
     private final EmployeeRepository employeeRepository;
 
     @Autowired
@@ -21,14 +23,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Transactional
     @Override
-    public List<Employee> getEmployees() {
-        return employeeRepository.findAll();
+    public List<Employee> getEmployees(int page) {
+        return employeeRepository.findAllEmployees(PageRequest.of(page,PAGE_SIZE));
     }
 
     @Transactional
     @Override
     public Employee getEmployeeById(int id) {
-        return employeeRepository.findById(id).orElseThrow(IllegalStateException::new);
+        return employeeRepository.findById(id)
+                .orElseThrow(()->new IllegalArgumentException("Employee with id: "+id+" not found"));
     }
 
     @Transactional
@@ -47,7 +50,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee editEmployee(Employee employee) {
         Employee editedEmployee = employeeRepository.findById(employee.getId())
-                .orElseThrow(()->new IllegalArgumentException("Employee not found"));
+                .orElseThrow(()->new IllegalArgumentException("Employee with id: "+employee.getId()+" not found"));
 
         editedEmployee.setPhoneNumber(employee.getPhoneNumber());
         editedEmployee.setName(employee.getName());

@@ -41,7 +41,6 @@ public class Employee {
             inverseJoinColumns = {@JoinColumn(name = "id_task")}
     )
     @JsonIgnoreProperties("employees")
-    @BatchSize(size = 2)
     private Set<Task> tasks = new HashSet<>();
 
     public Set<Task> getTasks() {

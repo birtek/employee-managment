@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.szydlowski.springbootcrudapi.model.Task;
-import pl.szydlowski.springbootcrudapi.service.TaskService;
+import pl.szydlowski.springbootcrudapi.service.TaskServiceImpl;
 
 import java.util.List;
 
@@ -14,21 +14,21 @@ import java.util.List;
 @RequestMapping("api/v1")
 public class TaskController {
 
-    private final TaskService taskService;
+    private final TaskServiceImpl taskServiceImpl;
 
     @Autowired
-    public TaskController(TaskService taskService) {
-        this.taskService = taskService;
+    public TaskController(TaskServiceImpl taskServiceImpl) {
+        this.taskServiceImpl = taskServiceImpl;
     }
 
     @GetMapping("/Tasks")
     public List<Task> getAllTask(){
-        return taskService.getTasks();
+        return taskServiceImpl.getTasks();
     }
 
     @GetMapping("/Task/{id}")
     public Task getTask(@PathVariable int id){
-        return taskService.getSingleTask(id);
+        return taskServiceImpl.getSingleTask(id);
     }
 
 }

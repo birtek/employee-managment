@@ -2,6 +2,8 @@ package pl.szydlowski.springbootcrudapi.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pl.szydlowski.springbootcrudapi.controller.dto.EmployeeDto;
+import pl.szydlowski.springbootcrudapi.controller.dto.EmployeeDtoMapper;
 import pl.szydlowski.springbootcrudapi.model.Employee;
 import pl.szydlowski.springbootcrudapi.service.EmployeeService;
 
@@ -19,8 +21,9 @@ public class EmployeeController {
     }
 
     @GetMapping("/employees")
-    public List<Employee> getEmployees() {
-        return employeeService.getEmployees();
+    public List<EmployeeDto> getEmployees(@RequestParam(required = false) int page) {
+        int pageNumber = page > 0 ? page : 1;
+        return EmployeeDtoMapper.mapToEmployeeDtos(employeeService.getEmployees(pageNumber-1));
     }
 
     @GetMapping("employees/{id}")
