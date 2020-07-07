@@ -14,5 +14,4 @@ public class SpringbootcrudapiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringbootcrudapiApplication.class, args);
 	}
-
 }

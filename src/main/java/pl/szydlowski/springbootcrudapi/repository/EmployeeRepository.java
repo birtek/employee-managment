@@ -11,11 +11,12 @@ import java.util.Optional;
 
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
-    @Query("select distinct e from Employee e")
+    @Query("select distinct e from Employee e ")
     List<Employee> findAllEmployees(Pageable page);
 
     @Override
     @Query("select e from Employee e left join fetch e.tasks where e.id = :id ")
     Optional<Employee> findById(@Param("id") Integer integer);
+
 
 }

@@ -1,5 +1,6 @@
 package pl.szydlowski.springbootcrudapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -30,15 +31,25 @@ public class Task {
 
     @ManyToMany(mappedBy = "tasks")
     @JsonIgnoreProperties("tasks")
-    private List<Employee> employees = new ArrayList<>();
+    private Set<Employee> employees;
 
+
+    @JsonIgnore
     @Transient
-    public Set<Integer> employeeId;
+    private Set<Integer> employeeId;
 
     @PostLoad
     private void postLoad() {
         employeeId = employees.stream().map(Employee::getId)
                 .collect(Collectors.toSet());
+    }
+
+    public Set<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(Set<Employee> employees) {
+        this.employees = employees;
     }
 
     public Set<Integer> getEmployeeId() {
@@ -87,14 +98,6 @@ public class Task {
 
     public void setStatus(Boolean status) {
         this.status = status;
-    }
-
-    public List<Employee> getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
     }
 
     @Override

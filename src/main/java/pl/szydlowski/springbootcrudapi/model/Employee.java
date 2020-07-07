@@ -10,6 +10,7 @@ import org.hibernate.annotations.BatchSize;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "tbl_employee")
@@ -40,13 +41,31 @@ public class Employee {
             inverseJoinColumns = {@JoinColumn(name = "id_task")}
     )
     @JsonIgnoreProperties("employees")
-    private List<Task> tasks = new ArrayList<>();
+    private Set<Task> tasks;
 
-    public List<Task> getTasks() {
+    @JsonIgnore
+    @Transient
+    private Set<Integer> tasksId;
+
+    @PostLoad
+    private void postLoad() {
+        tasksId = tasks.stream().map(Task::getId)
+                .collect(Collectors.toSet());
+    }
+
+    public Set<Integer> getTasksId() {
+        return tasksId;
+    }
+
+    public void setTasksId(Set<Integer> tasksId) {
+        this.tasksId = tasksId;
+    }
+
+    public Set<Task> getTasks() {
         return tasks;
     }
 
-    public void setTasks(List<Task> tasks) {
+    public void setTasks(Set<Task> tasks) {
         this.tasks = tasks;
     }
 
@@ -116,7 +135,7 @@ public class Employee {
                 ", department='" + department + '\'' +
                 ", date=" + date +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", tasks=" + tasks +
+               // ", tasks=" + tasks +
                 '}';
     }
 }

@@ -10,7 +10,6 @@ public interface EmployeeService {
     void saveEmployee(Employee employee);
     void deleteEmployee(int id);
     Employee editEmployee(Employee employee);
-
     List<Employee> getEmployeesWithTasks(int page);
 
 }

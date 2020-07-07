@@ -8,6 +8,7 @@ import pl.szydlowski.springbootcrudapi.model.Task;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Repository
 public interface TaskRepository extends JpaRepository<Task,Integer> {
@@ -20,5 +21,6 @@ public interface TaskRepository extends JpaRepository<Task,Integer> {
     Optional<Task> findById(@Param("id")Integer integer);
 
 
-    List<Task> findAllByIdIn(List<Integer> ids);
+    List<Task> findAllByIdIn(Set<Integer> ids);
+
 }
