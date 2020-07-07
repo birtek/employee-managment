@@ -21,6 +21,6 @@ public interface TaskRepository extends JpaRepository<Task,Integer> {
     Optional<Task> findById(@Param("id")Integer integer);
 
 
-    List<Task> findAllByIdIn(Set<Integer> ids);
+    List<Task> findAllByIdIsIn(Set<Integer> ids);
 
 }

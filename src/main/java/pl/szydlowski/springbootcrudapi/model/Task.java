@@ -33,31 +33,11 @@ public class Task {
     @JsonIgnoreProperties("tasks")
     private Set<Employee> employees;
 
-
-    @JsonIgnore
-    @Transient
-    private Set<Integer> employeeId;
-
-    @PostLoad
-    private void postLoad() {
-        employeeId = employees.stream().map(Employee::getId)
-                .collect(Collectors.toSet());
-    }
-
     public Set<Employee> getEmployees() {
-        return employees;
-    }
-
+      return employees;
+}
     public void setEmployees(Set<Employee> employees) {
         this.employees = employees;
-    }
-
-    public Set<Integer> getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setEmployeeId(Set<Integer> employeeId) {
-        this.employeeId = employeeId;
     }
 
     public Integer getId() {

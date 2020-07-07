@@ -34,7 +34,8 @@ public class Employee {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(fetch = FetchType.EAGER)
+    @BatchSize(size = 5)
     @JoinTable(
             name = "tbl_employee_task",
             joinColumns = {@JoinColumn(name = "id_employee")},
@@ -43,24 +44,15 @@ public class Employee {
     @JsonIgnoreProperties("employees")
     private Set<Task> tasks;
 
-    @JsonIgnore
-    @Transient
-    private Set<Integer> tasksId;
-
-    @PostLoad
-    private void postLoad() {
-        tasksId = tasks.stream().map(Task::getId)
-                .collect(Collectors.toSet());
+    public void addTask(Task task){
+        this.tasks.add(task);
+        task.getEmployees().add(this);
     }
 
-    public Set<Integer> getTasksId() {
-        return tasksId;
+    public void removeTask(Task task){
+        this.tasks.remove(task);
+        task.getEmployees().remove(this);
     }
-
-    public void setTasksId(Set<Integer> tasksId) {
-        this.tasksId = tasksId;
-    }
-
     public Set<Task> getTasks() {
         return tasks;
     }
