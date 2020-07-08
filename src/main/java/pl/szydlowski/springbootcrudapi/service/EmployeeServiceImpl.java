@@ -5,19 +5,15 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.szydlowski.springbootcrudapi.model.Employee;
-import pl.szydlowski.springbootcrudapi.model.Task;
 import pl.szydlowski.springbootcrudapi.repository.EmployeeRepository;
 import pl.szydlowski.springbootcrudapi.repository.TaskRepository;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.*;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-    private static final int PAGE_SIZE =    5;
+    private static final int PAGE_SIZE = 5;
     private final EmployeeRepository employeeRepository;
     private final TaskRepository taskRepository;
 
@@ -28,15 +24,15 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Employee> getEmployees(int page) {
-    return employeeRepository.findAllEmployees(PageRequest
-                .of(ServiceUtils.checkCorrectPage(page) - 1, PAGE_SIZE));
-}
+    public List<Employee> getEmployees(String page) {
+        return employeeRepository.findAllEmployees(PageRequest
+                .of(ValidatorPage.validatePage(page), PAGE_SIZE));
+    }
 
     @Override
-    public List<Employee> getEmployeesWithTasks(int page) {
+    public List<Employee> getEmployeesWithTasks(String page) {
         return employeeRepository.findAllEmployeesWithPost(PageRequest
-                .of(ServiceUtils.checkCorrectPage(page) - 1, PAGE_SIZE));
+                .of(ValidatorPage.validatePage(page), PAGE_SIZE));
     }
 
     @Override
@@ -73,3 +69,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
 }
+
+
+

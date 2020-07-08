@@ -7,7 +7,10 @@ import pl.szydlowski.springbootcrudapi.controller.dto.EmployeeDtoMapper;
 import pl.szydlowski.springbootcrudapi.model.Employee;
 import pl.szydlowski.springbootcrudapi.service.EmployeeService;
 
+
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -21,19 +24,18 @@ public class EmployeeController {
     }
 
     @GetMapping("/employees")
-    public List<EmployeeDto> getEmployees(@RequestParam(required = false) int page) {
+    public List<EmployeeDto> getEmployees(@RequestParam(required = false) String page) {
         return EmployeeDtoMapper.mapToEmployeeDtos(employeeService.getEmployees(page));
     }
 
     @GetMapping("/employees/tasks")
-    public List<Employee> getEmployeesWithTasks(@RequestParam(required = false) int page) {
+    public List<Employee> getEmployeesWithTasks(@RequestParam(required = false) String page) {
         return employeeService.getEmployeesWithTasks(page);
     }
 
     @GetMapping("employees/{id}")
     public Employee getEmployee(@PathVariable int id){
-        Employee employee = employeeService.getEmployeeById(id);
-        return employee;
+        return employeeService.getEmployeeById(id);
     }
 
     @PostMapping("/employees")

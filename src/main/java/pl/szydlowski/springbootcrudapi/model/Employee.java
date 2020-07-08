@@ -34,8 +34,7 @@ public class Employee {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @BatchSize(size = 5)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "tbl_employee_task",
             joinColumns = {@JoinColumn(name = "id_employee")},
@@ -127,7 +126,6 @@ public class Employee {
                 ", department='" + department + '\'' +
                 ", date=" + date +
                 ", phoneNumber='" + phoneNumber + '\'' +
-               // ", tasks=" + tasks +
                 '}';
     }
 }
