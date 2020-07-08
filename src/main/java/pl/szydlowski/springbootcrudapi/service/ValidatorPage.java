@@ -6,19 +6,19 @@ import java.util.regex.Pattern;
 class ValidatorPage {
     private  ValidatorPage(){};
 
-    private static final int FIRST_INDEX = 1;
+    private static final int ZERO_INDEX = 0;
 
         static int validatePage(String page) {
         if (page == null) {
-            return FIRST_INDEX - 1;
+            return ZERO_INDEX;
         }
         if (isaNumber(page)) {
             int currentPage = Integer.parseInt(page);
-            if (currentPage > FIRST_INDEX ) {
+            if (currentPage >  ZERO_INDEX ) {
                 return currentPage - 1;
             }
         }
-        return FIRST_INDEX - 1;
+        return ZERO_INDEX;
     }
 
     private static boolean isaNumber(String page) {
