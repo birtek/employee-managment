@@ -1,5 +1,6 @@
 package pl.szydlowski.springbootcrudapi.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -20,10 +21,10 @@ public class Task {
     private Integer id;
 
     private String description;
-
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @Column(name = "begin")
     private LocalDate taskBegin;
-
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @Column(name = "end")
     private LocalDate taskEnd;
 

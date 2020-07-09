@@ -1,5 +1,6 @@
 package pl.szydlowski.springbootcrudapi.controller.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import pl.szydlowski.springbootcrudapi.model.Gender;
 
 import java.time.LocalDate;

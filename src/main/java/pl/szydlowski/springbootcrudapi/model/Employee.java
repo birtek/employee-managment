@@ -2,10 +2,9 @@ package pl.szydlowski.springbootcrudapi.model;
 
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import org.hibernate.annotations.BatchSize;
+
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -21,14 +20,15 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_employee")
     private Integer id;
-    @Column
+
     private String name;
     @Column(name = "last_name")
     private String lastName;
     @Enumerated(EnumType.STRING)
     private Gender gender;
-    @Column
     private String department;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @Column(name = "dob")
     private LocalDate date;
     @Column(name = "phone_number")

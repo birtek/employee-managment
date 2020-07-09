@@ -39,9 +39,9 @@ public class EmployeeController {
     }
 
     @PostMapping("/employees")
-    public Employee saveEmployee(@RequestBody Employee employeeObj) {
-        employeeService.saveEmployee(employeeObj);
-        return employeeObj;
+    public Employee saveEmployee(@RequestBody Employee employee) {
+        employeeService.saveEmployee(employee);
+        return employee;
     }
 
     @DeleteMapping("/employees/{id}")
