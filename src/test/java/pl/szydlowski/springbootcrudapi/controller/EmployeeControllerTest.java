@@ -30,13 +30,15 @@ class EmployeeControllerTest {
     void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        employee = new Employee();
-        employee.setDate(LocalDate.parse("1994-12-13"));
-        employee.setDepartment("hr");
-        employee.setGender(Gender.OTHER);
-        employee.setName("Alex");
-        employee.setLastName("Novikic");
-        employee.setPhoneNumber("998765432");
+        Employee employee = Employee.builder()
+                .id(1)
+                .name("Alex")
+                .lastName("Stecko")
+                .department("hr")
+                .gender(Gender.MALE)
+                .date(LocalDate.parse("1994-12-13"))
+                .phoneNumber("987654321")
+                .build();
     }
 
     @Test

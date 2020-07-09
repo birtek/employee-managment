@@ -31,12 +31,16 @@ class EmployeeServiceImplTest {
     @Test
     void getEmployeeById() {
 
-        Employee employee = new Employee();
-        employee.setId(1);
-        employee.setDate(LocalDate.parse("1994-12-13"));
-        employee.setDepartment("hr");
-        employee.setGender(Gender.MALE);
-        employee.setName("Alex");
+        Employee employee = Employee.builder()
+                .id(1)
+                .name("Alex")
+                .lastName("Stecko")
+                .department("hr")
+                .gender(Gender.MALE)
+                .date(LocalDate.parse("1994-12-13"))
+                .phoneNumber("987654321")
+                .build();
+
 
 
         when(employeeService.getEmployeeById(anyInt())).thenReturn(employee);

@@ -25,4 +25,16 @@ public class EmployeeDtoMapper {
                 .phoneNumber(employee.getPhoneNumber())
                 .build();
     }
+
+    public static Employee mapToEmployee(EmployeeDto employeeDto){
+           return Employee.builder()
+                   .id(employeeDto.getId())
+                   .name(employeeDto.getName())
+                   .lastName(employeeDto.getLastName())
+                   .department(employeeDto.getDepartment())
+                   .gender(employeeDto.getGender())
+                   .date(employeeDto.getDate())
+                   .phoneNumber(employeeDto.getPhoneNumber())
+                   .build();
+    }
 }

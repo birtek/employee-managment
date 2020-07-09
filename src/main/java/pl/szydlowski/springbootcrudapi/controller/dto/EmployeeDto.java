@@ -11,6 +11,7 @@ public class EmployeeDto {
     private String lastName;
     private Gender gender;
     private String department;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate date;
     private String phoneNumber;
 

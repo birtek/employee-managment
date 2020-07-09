@@ -9,11 +9,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "tbl_employee")
 public class Employee {
+    private Employee(){}
     //UUID uuid = UUID.randomUUID();
 
     @Id
@@ -52,6 +52,7 @@ public class Employee {
         this.tasks.remove(task);
         task.getEmployees().remove(this);
     }
+
     public Set<Task> getTasks() {
         return tasks;
     }
@@ -127,5 +128,66 @@ public class Employee {
                 ", date=" + date +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
+    }
+    public static final class Builder {
+        private Integer id;
+        private String name;
+        private String lastName;
+        private Gender gender;
+        private String department;
+        private LocalDate date;
+        private String phoneNumber;
+
+        public Builder id(Integer id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder lastName(String lastName) {
+            this.lastName = lastName;
+            return this;
+        }
+
+        public Builder gender(Gender gender) {
+            this.gender = gender;
+            return this;
+        }
+
+        public Builder department(String department) {
+            this.department = department;
+            return this;
+        }
+
+        public Builder date(LocalDate date) {
+            this.date = date;
+            return this;
+        }
+
+        public Builder phoneNumber(String phoneNumber) {
+            this.phoneNumber = phoneNumber;
+            return this;
+        }
+
+        public Employee build(){
+            Employee employeeDto = new Employee();
+
+            employeeDto.id = this.id;
+            employeeDto.name = this.name;
+            employeeDto.lastName = this.lastName;
+            employeeDto.department = this.department;
+            employeeDto.gender = this.gender;
+            employeeDto.date = this.date;
+            employeeDto.phoneNumber = this.phoneNumber;
+
+            return employeeDto;
+        }
+    }
+    public static Builder builder(){
+        return new Builder();
     }
 }
