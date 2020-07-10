@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.szydlowski.springbootcrudapi.model.Employee;
 import pl.szydlowski.springbootcrudapi.repository.EmployeeRepository;
-import pl.szydlowski.springbootcrudapi.repository.TaskRepository;
 
 import java.util.*;
 
@@ -15,12 +14,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private static final int PAGE_SIZE = 5;
     private final EmployeeRepository employeeRepository;
-    private final TaskRepository taskRepository;
 
     @Autowired
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository, TaskRepository taskRepository) {
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
-        this.taskRepository = taskRepository;
     }
 
     @Override
@@ -41,13 +38,11 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .orElseThrow(() -> new IllegalArgumentException("Employee with id: " + id + " not found"));
     }
 
-    @Transactional
     @Override
     public Employee saveEmployee(Employee employee) {
         return employeeRepository.save(employee);
     }
 
-    @Transactional
     @Override
     public void deleteEmployee(int id) {
         employeeRepository.deleteById(id);

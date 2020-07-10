@@ -2,15 +2,15 @@ package pl.szydlowski.springbootcrudapi.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pl.szydlowski.springbootcrudapi.controller.dto.EmployeeDto;
-import pl.szydlowski.springbootcrudapi.controller.dto.EmployeeDtoMapper;
+import pl.szydlowski.springbootcrudapi.controller.dto.employee.EmployeeDto;
+import pl.szydlowski.springbootcrudapi.controller.dto.employee.EmployeeDtoMapper;
+import pl.szydlowski.springbootcrudapi.controller.dto.employee.NewEmployeeDto;
+import pl.szydlowski.springbootcrudapi.controller.dto.employee.NewEmployeeDtoMapper;
 import pl.szydlowski.springbootcrudapi.model.Employee;
 import pl.szydlowski.springbootcrudapi.service.EmployeeService;
 
 
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -39,19 +39,18 @@ public class EmployeeController {
     }
 
     @PostMapping("/employees")
-    public Employee saveEmployee(@RequestBody EmployeeDto employeeDto) {
-        return employeeService.saveEmployee(EmployeeDtoMapper.mapToEmployee(employeeDto));
+    public Employee saveEmployee(@RequestBody NewEmployeeDto employeeDto) {
+        return employeeService.saveEmployee(NewEmployeeDtoMapper.mapToEmployee(employeeDto));
     }
 
     @DeleteMapping("/employees/{id}")
     public String deleteEmployee(@PathVariable int id){
         employeeService.deleteEmployee(id);
-        return "Employee has been deleted with id: " + id;
+        return "Employee with id: " + id +" has been deleted";
     }
 
     @PutMapping("/employees")
-    public Employee updateEmployee(@RequestBody Employee employeeObj){
-        employeeService.editEmployee(employeeObj);
-        return employeeObj;
+    public Employee updateEmployee(@RequestBody EmployeeDto employeeDto){
+       return employeeService.editEmployee(EmployeeDtoMapper.mapToEmployee(employeeDto));
     }
 }

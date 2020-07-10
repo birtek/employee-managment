@@ -1,5 +1,6 @@
-package pl.szydlowski.springbootcrudapi.controller.dto;
+package pl.szydlowski.springbootcrudapi.controller.dto.employee;
 
+import pl.szydlowski.springbootcrudapi.controller.dto.employee.EmployeeDto;
 import pl.szydlowski.springbootcrudapi.model.Employee;
 
 import java.util.List;
