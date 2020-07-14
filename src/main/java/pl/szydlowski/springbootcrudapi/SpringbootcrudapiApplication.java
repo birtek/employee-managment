@@ -14,9 +14,6 @@ import java.time.LocalDate;
 public class SpringbootcrudapiApplication {
 
 	public static void main(String[] args) throws IOException {
-		//SpringApplication.run(SpringbootcrudapiApplication.class, args);
-		GenerateSQL sql = new GenerateSQL();
-		sql.GenerateDataToDatabase();
-
+		SpringApplication.run(SpringbootcrudapiApplication.class, args);
 	}
 }
