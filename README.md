@@ -22,9 +22,10 @@ Project is created with:
 ## Setup
 To run this project, install it locally using:
 
-maven package
-java -jar target/employee-managment-0.0.1-SNAPSHOT.jar
-
+```
+$ maven package
+$ java -jar target/employee-managment-0.0.1-SNAPSHOT.jar
+```
 
 
 ## TODO
