@@ -25,5 +25,5 @@ To run this project, install it locally using npm:
 
 
 ## TODO
-*Calculate workers salary
-*Add Frontend(Angular)
+* Calculate workers salary
+* Add Frontend(Angular)
