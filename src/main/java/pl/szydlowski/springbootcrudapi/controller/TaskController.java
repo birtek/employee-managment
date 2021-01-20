@@ -21,12 +21,12 @@ public class TaskController {
         this.taskServiceImpl = taskServiceImpl;
     }
 
-    @GetMapping("/Tasks")
+    @GetMapping("/tasks")
     public List<Task> getAllTask(){
         return taskServiceImpl.getTasks();
     }
 
-    @GetMapping("/Task/{id}")
+    @GetMapping("/task/{id}")
     public Task getTask(@PathVariable int id){
         return taskServiceImpl.getSingleTask(id);
     }
